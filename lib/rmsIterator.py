@@ -7,6 +7,7 @@ from lsl.misc.mathutil import to_dB
 #from matplotlib import pyplot as plt
 from datetime import datetime
 
+
 #04302014run.txt  05022014run.txt  07172014run.txt  filelist.txt            MoonBounce2run.txt
 #05012014run.txt  06182014run.txt  08162014run.txt  MoonBounce1run.txt
 
@@ -85,6 +86,7 @@ class rmsIterator:
         self.returnDataT2P1.append(math.sqrt(numpy.dot(numpyArrT2P1,numpyArrT2P1)/(self.chunkSizeinFrames*4096)))
         #print 'Chunk block (T1P0 and T1P1 and T2P0 and T2P1) processing time: ' + str(datetime.now()-self.timer)
 
+
     def iterate(self, numberChunks):
         self.totalTime = datetime.now()
         j = 0
@@ -96,3 +98,19 @@ class rmsIterator:
         #Clean up working array
         self.chunkArray=[]
         print '<br>TOTAL iteration time for file: ' + str(datetime.now()-self.totalTime)
+        #D3 needs each data point encapsulated as a JSON object.
+        self.jsonT1P0 =[] 
+        for i,data in enumerate(self.returnDataT1P0):
+          self.jsonT1P0.append({"x": i,"y": data})
+        self.jsonT1P1 =[] 
+        for i,data in enumerate(self.returnDataT1P1):
+          self.jsonT1P1.append({"x": i,"y": data})
+        self.jsonT2P0 =[] 
+        for i,data in enumerate(self.returnDataT2P0):
+          self.jsonT2P0.append({"x": i,"y": data})
+        self.jsonT2P1 =[] 
+        for i,data in enumerate(self.returnDataT2P1):
+          self.jsonT2P1.append({"x": i,"y": data})
+
+
+

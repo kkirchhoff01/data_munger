@@ -3,6 +3,7 @@ import os
 from rmsIterator import rmsIterator
 from rmsMaster import rmsMaster
 from datetime import datetime
+
 import thread
 timer = datetime.now()
 

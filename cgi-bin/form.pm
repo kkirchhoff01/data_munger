@@ -8,8 +8,11 @@ use CGI qw(:standard);
 my $cgi = new CGI;
 my $cgi_vars = $cgi->Vars();
 
-#Latest version of JQuery
+#import JQuery
 my $jquery ='http://24.124.100.208/lib/jquery.min.js';
+
+#import latest version of d3
+my $d3 = 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.10/d3.js';
 
 #my project's JavaScript src Path
 my $java_src = 'http://24.124.100.208/lib/actions.js';
@@ -142,8 +145,14 @@ sub form_instance($;$) {
       $cgi->Tr($cgi->td({-colspan=>'3'},
                          $cgi->div({-name=>'output_view',
                                     -id=>'output_view',
-                                    -style=>'background:#37e332;display:none;'},
-                                    $cgi->img({-src=>'http://24.124.100.208/img/example.png'}),
+                                    -style=>'background:#ffffff;display:none;'},
+                                    $cgi->center($cgi->img({-src=>'http://24.124.100.208/img/example.png'}),
+                                                           $cgi->button({-id=>"graph_maker",
+                                                                         -name=>"graph_maker",
+                                                                         -onclick=>"draw_graph('http://24.124.100.208/img/example_t1p0.json');draw_graph('http://24.124.100.208/img/example_t1p1.json');draw_graph('http://24.124.100.208/img/example_t2p0.json');draw_graph('http://24.124.100.208/img/example_t2p1.json');",
+                                                                         -value=>"Generate SVG from JSON, via JS"}
+                                                             )
+                                                )
                                   )
                        )
               ),
@@ -190,6 +199,7 @@ sub html_gen ($;$;$) {
                                 -head=>[$cgi->Link({-rel=>'SHORTCUT ICON',
                                         -href=>'http://24.124.100.208/favicon.ico'}),],
                                 -script=> [{-src=>$jquery},
+                                           {-src=>$d3},
                                            {-src=>$java_src}]
                                );
 

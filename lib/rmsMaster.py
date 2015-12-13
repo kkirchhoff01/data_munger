@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 from matplotlib.ticker import FormatStrFormatter
 
+from to_json import to_json
+
+
 class rmsMaster:
     def __init__(self, fileInput, fileOutput, framesPerChunk, howManyChunks):
         
@@ -61,6 +64,10 @@ class rmsMaster:
         ax4.legend(loc='best')
 
         fig.savefig(self.fileOutput)
+        to_json(self.rmsAnalysis.jsonT1P0,self.fileOutput+"_t1p0.json")
+        to_json(self.rmsAnalysis.jsonT1P1,self.fileOutput+"_t1p1.json")
+        to_json(self.rmsAnalysis.jsonT2P0,self.fileOutput+"_t2p0.json")
+        to_json(self.rmsAnalysis.jsonT2P1,self.fileOutput+"_t2p1.json")
 
     def computeHist(self):
         self.rmsAnalysis = rmsIterator(self.fileInput,self.framesPerChunk)
@@ -108,4 +115,8 @@ class rmsMaster:
         ax4.set_ylabel('Count')
         ax4.legend(loc='best')
 
-        fig.savefig(self.fileOutput)
+        fig.savefig(self.fileOutput+".png")
+        to_json(self.rmsAnalysis.jsonT1P0,self.fileOutput+"_t1p0.json")
+        to_json(self.rmsAnalysis.jsonT1P1,self.fileOutput+"_t1p1.json")
+        to_json(self.rmsAnalysis.jsonT2P0,self.fileOutput+"_t2p0.json")
+        to_json(self.rmsAnalysis.jsonT2P1,self.fileOutput+"_t2p1.json")
